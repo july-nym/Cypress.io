@@ -1,0 +1,19 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run --spec cypress/integration/10Travlr/**/*.spec.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ci": "^1.0.0"
+  },
+  "devDependencies": {
+    "cypress": "^4.4.0",
+    "cypress-terminal-report": "^1.2.1"
+  }
+}
