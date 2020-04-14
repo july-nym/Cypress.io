@@ -6,7 +6,7 @@ jobs:
     executor: cypress/base-10
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/TEST
       - run: npm run test
 workflows:
   build:
