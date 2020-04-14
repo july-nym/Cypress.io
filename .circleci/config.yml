@@ -1,9 +1,12 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.19.1
+  cypress: cypress-io/cypress@1
+executors:
+  with-chrome:
+    docker:
+      - image: 'cypress/browsers:chrome69'
 workflows:
   build:
     jobs:
       - cypress/run:
-          executor: cypress/base-10
-          yarn: true
+          executor: with-chrome
