@@ -1,20 +1,12 @@
+# to use orbs, must use version >= 2.1
 version: 2.1
 orbs:
+  # import Cypress orb by specifying an exact version x.y.z
+  # or the latest version 1.x.x using "@1" syntax
   cypress: cypress-io/cypress@1
-jobs:
-  release:
-    executor: cypress/base-10
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: npm run test
 workflows:
   build:
     jobs:
-      - cypress/install
-      - cypress/run:
-          requires:
-            - cypress/install
-      - release:
-          requires:
-            - cypress-io/run
+      # "cypress" is the name of the imported orb
+      # "run" is the name of the job defined in Cypress orb
+      - cypress/run
