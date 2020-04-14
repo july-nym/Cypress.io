@@ -1,0 +1,9 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.19.1
+workflows:
+  build:
+    jobs:
+      - cypress/run:
+          executor: cypress/base-10
+          yarn: true
