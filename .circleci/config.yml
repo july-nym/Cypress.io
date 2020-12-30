@@ -1,16 +1,9 @@
-jobs:
-  install-node-example:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - checkout
-      - node/install:
-          install-yarn: true
-      - run: node --version
-orbs:
-  node: circleci/node@4.1.0
 version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1.26.0
+
 workflows:
-  test_my_app:
+  build:
     jobs:
-      - install-node-example
+      - cypress/run
