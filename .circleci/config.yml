@@ -7,6 +7,11 @@ jobs:
       - image: cypress/included:4.10.0
     working_directory: ~/app
 
+    run:
+      name: k6-tests
+      command: |
+          docker pull loadimpact/k6:latest
+
     steps:
       - checkout
       - restore_cache:
@@ -30,8 +35,4 @@ jobs:
             - app
             - .cache/Cypress
       
-    run:
-      name: k6-tests
-      command: |
-          docker pull loadimpact/k6:latest
-          npm run k6-tests
+      - run:   npm run k6-tests
