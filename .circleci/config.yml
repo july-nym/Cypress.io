@@ -52,6 +52,7 @@ workflows:
   build:
     jobs:
       - cypress/install
+      - run_performance_tests
 
       - cypress/run:
           name: regression-testing
@@ -79,6 +80,4 @@ workflows:
               only: /^v.*/
           requires:
             - "pause_workflow"
-
-      - run_performance_tests
           
