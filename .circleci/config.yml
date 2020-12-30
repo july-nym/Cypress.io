@@ -20,6 +20,5 @@ workflows:
             - "cypress/install"
           command: npm run 10travlr-production
       
-      - newman/newman-run:
-          name: api-testing
+      - api-testing:
           command: npm run api-test
