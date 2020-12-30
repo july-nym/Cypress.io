@@ -5,7 +5,12 @@ orbs:
   slack: circleci/slack@4.2.0
   node: circleci/node@4.1
 
-jobs: 
+jobs:
+  run_performance_tests:
+    machine: true
+    steps:
+    - checkout
+
   api-testing:
     executor: newman/postman-newman-docker
     steps:
@@ -39,12 +44,6 @@ k6_performance_tests: &k6_performance_tests
     command: |
       docker pull loadimpact/k6:latest
       docker run -i loadimpact/k6 run - < /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
-
-run_performance_tests:
-  machine: true
-  steps:
-    - checkout
-    - *k6_performance_tests
           
 
 
