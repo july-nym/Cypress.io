@@ -9,4 +9,4 @@ workflows:
           name: regression-test
           requires:
             - "cypress/install"
-          executor: cypress/included:4.10.0
+          executor: cypress/base-10
