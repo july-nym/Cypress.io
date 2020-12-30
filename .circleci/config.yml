@@ -5,7 +5,8 @@ jobs:
   build:
     docker:
       - image: cypress/included:4.10.0
-    
+    environment:
+      TERM: xterm
     working_directory: ~/app
 
     steps:
@@ -31,4 +32,4 @@ jobs:
             - app
             - .cache/Cypress
       
-      - run:   npm run k6-tests
+      - run:   npm run k6-test
