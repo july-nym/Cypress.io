@@ -1,13 +1,12 @@
 version: 2.1
 
 jobs:
-  k6_local_test:
+  build:
     docker:
-      - image: "cimg/base:stable"
-    runs-on:
-      - ubuntu-latest
-    container: 
-      - docker://loadimpact/k6:latest
-    steps: 
+      - image: cimg/base:stable'
+    runs-on: macos-latest
+
+    steps:
       - checkout
-      - run: k6 run docker/script.js
+      - run: brew install k6
+      - run: k6 run basic/script.js
