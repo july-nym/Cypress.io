@@ -4,7 +4,7 @@
   "description": "Cypress is a next generation front end testing tool built for the modern web. We address the key pain points developers and QA engineers face when testing modern applications.",
   "main": "index.js",
   "scripts": {
-    "10travlr-production": "npx cypress run --spec 'cypress/integration/10travlr/production/regression/**/*' --headless --browser chrome --record --key e73f75bc-9ff2-4600-8eca-1f9570abf53e --tag '10travlr, production' ",
+    "10travlr-production": "npx cypress run --spec 'cypress/integration/10travlr/production/regression/**/*' --headless --record --key e73f75bc-9ff2-4600-8eca-1f9570abf53e --tag '10travlr, production' ",
     "10travlr-regression": "npm run 10travlr-production",
     "10travlr-lokal": "npx cypress run --spec 'cypress/integration/10travlr/production/regression/**/*' --headless --browser chrome",
     "10travlr": "npm run 10travlr-lokal",
