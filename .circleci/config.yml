@@ -5,3 +5,9 @@ orbs:
 
   jobs:
     command: docker pull loadimpact/k6:latest
+
+
+workflow:
+  test:
+    jobs:
+      - command
