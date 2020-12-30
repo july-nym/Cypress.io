@@ -5,5 +5,5 @@ workflows:
   build:
     jobs:
       - cypress/run:
-          executors: cypress/included:4.10.0
+          executors: 'cypress/included:latest'
           command: npm run 10travlr-production
