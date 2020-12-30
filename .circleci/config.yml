@@ -7,4 +7,4 @@ jobs:
       - image: loadimpact/k6:latest
 
     steps:
-      - run: brew k6 install 
+      - run: docker run -i loadimpact/k6 run - < /Users/reposado/k6/script.js  
