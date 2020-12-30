@@ -3,9 +3,7 @@ version: 2.1
 jobs:
 
   build:
-    name: k6 local test on macos
     runs-on: macos-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v1
