@@ -1,96 +1,15 @@
-version: 2.1
-
-orbs:
-  newman: postman/newman@0.0.2
-  slack: circleci/slack@4.1
+on: [push]
 
 jobs:
-
-  api-test:
-      executor: newman/postman-newman-docker
-      steps:
-       - checkout
-       - run: npm run api-test
-       
-  build:
-    docker:
-      - image: cypress/included:4.10.0
-    environment:
-      TERM: xterm
-    working_directory: ~/app
+  k6_local_test:
+    name: k6 local test run - basic example
+    runs-on: ubuntu-latest
 
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: Install Dependencies
-          command: npm ci
+      - name: Checkout
+        uses: actions/checkout@v1
 
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - app
-            - .cache/Cypress
- 
-
-  regression-test:
-    docker:
-      - image: cypress/included:4.10.0
-    environment:
-        TERM: xterm
-    working_directory: ~/app
-
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: npm run 10travlr-production
-
-  deploy:
-    docker:
-      - image: 'cimg/base:stable'
-
-    steps:
-      - slack/notify:
-          channel: C01HK2BGK1T
-          mentions: '@here'
-          event: fail
-          template: basic_fail_1
-      - slack/notify:
-          channel: C01HK2BGK1T
-          event: pass
-          template: success_tagged_deploy_1
-
-workflows:
-  test-and-deploy:
-    jobs:
-      - build
-      - api-test:
-          requires:
-            - build
-      - regression-test:
-          requires: 
-            - api-test
-      - pause_workflow:
-          filters:
-            tags:
-              only: /^v.*/
-          requires:
-            - regression-test
-          type: approval
-      - deploy:
-          context: test-context
-          filters:
-            tags:
-              only: /^v.*/
-          requires:
-            - pause_workflow
+      - name: Run local k6 test
+        uses: k6io/action@v0.1
+        with:
+          filename: basic/script.js
