@@ -47,7 +47,10 @@ workflows:
   build:
     jobs:
       - cypress/install
-      - performance-testing
+
+      - performance-testing:
+          requires:
+            - "cypress/install"
 
       - cypress/run:
           name: regression-testing
@@ -65,6 +68,7 @@ workflows:
               only: /^v.*/
           requires:
             - "regression-testing"
+            - "performance-testing"
             - "api-testing"
           type: approval
       
