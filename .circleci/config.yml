@@ -46,21 +46,21 @@ jobs:
 workflows: 
   build:
     jobs:
-      - cypress/install
+      - install
 
       - performance-testing:
           requires:
-            - "cypress/install"
+            - "install"
 
       - cypress/run:
           name: regression-testing
           requires:
-            - "cypress/install"
+            - "install"
           command: npm run 10travlr-production
       
       - api-testing:
           requires:
-            - "cypress/install"
+            - "install"
 
       - pause_workflow:
           filters:
