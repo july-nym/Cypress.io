@@ -5,12 +5,13 @@ jobs:
   build:
     docker:
       - image: cypress/included:4.10.0
-    working_directory: ~/app
-
+    
     run:
-      name: k6-tests
+      name: pull-docker
       command: |
           docker pull loadimpact/k6:latest
+
+    working_directory: ~/app
 
     steps:
       - checkout
