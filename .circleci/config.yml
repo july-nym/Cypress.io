@@ -35,9 +35,10 @@ jobs:
     machine: true
     steps:
       - checkout
-    command: |
-            docker pull loadimpact/k6:latest
-            docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+    run:
+      command: |
+        docker pull loadimpact/k6:latest
+        docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
           
 
 
