@@ -17,7 +17,9 @@ jobs:
       - attach_workspace:
           at: ~/
 
-    command: - docker pull loadimpact/k6:latest
+      - run:
+          name: pull docker
+          command: - docker pull loadimpact/k6:latest
           
 
 
