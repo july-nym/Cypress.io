@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
       - newman/newman-run:
-          collection: ./collection.json
-      - run: npm run api-tests
+          collection: 
+            - npm run api-test
 
 workflows:
   build:
@@ -22,5 +22,3 @@ workflows:
           requires:
             - "cypress/install"
           command: npm run 10travlr-production
-      
-      - api-testing
