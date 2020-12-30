@@ -70,7 +70,7 @@ workflows:
           requires:
             - "pause_workflow"
 
-      - run_performance_tests:
+      - k6_performance_tests:
           name: Running k6 tests
           requires:
             - "cypress/install"
