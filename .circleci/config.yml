@@ -1,13 +1,10 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.26.0
-  node: circleci/node@4.1.0
 
 jobs:
 
   build:
     docker:
-      - image: loadimpact/k6:latest
+      - image: cypress/included:4.10.0
     working_directory: ~/app
 
     steps:
@@ -32,5 +29,9 @@ jobs:
           paths:
             - app
             - .cache/Cypress
-          
-      - run: npm run k6-tests
+      
+    run:
+      name: k6-tests
+      command: |
+          docker pull loadimpact/k6:latest
+          npm run k6-tests
