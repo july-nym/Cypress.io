@@ -3,9 +3,8 @@ version: 2.1
 jobs:
 
   build:
-  
-    macos:
-      xcode: 11.3.0
+    docker:
+      - image: loadimpact/k6:latest
 
     steps:
       - run: brew k6 install 
