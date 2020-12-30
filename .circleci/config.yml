@@ -7,9 +7,11 @@ jobs:
       - image: cypress/included:4.10.0
         environment:
           TERM: xterm
-      - image: loadimpact/k6:latest
+          
 
     steps:
       - checkout
-      - run: npm run k6-test
-      
+      - run: 
+          name: Running k6 tests
+          command: |
+            docker pull loadimpact/k6:latest
