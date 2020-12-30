@@ -1,18 +1,16 @@
-version: 2.1
-
 jobs:
-
-  build:
+  install-node-example:
     docker:
-      - image: cypress/included:4.10.0
-        environment:
-          TERM: xterm
-          
-
+      - image: 'cimg/base:stable'
     steps:
       - checkout
-      - run: 
-          name: Running k6 tests
-          command: |
-            docker pull loadimpact/k6:latest
-            docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+      - node/install:
+          install-yarn: true
+      - run: node --version
+orbs:
+  node: circleci/node@4.1.0
+version: 2.1
+workflows:
+  test_my_app:
+    jobs:
+      - install-node-example
