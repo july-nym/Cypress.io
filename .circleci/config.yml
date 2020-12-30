@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /usr/local/bin/docker
+          at: /Users/reposado/
 
       - run:
           name: pull docker
