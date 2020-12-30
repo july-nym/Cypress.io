@@ -3,7 +3,7 @@ orbs:
   cypress: cypress-io/cypress@1.26.0
 
   jobs:
-    cypress/run:
+    regression-test:
       executors:
         - cypress/base-14
     steps:
@@ -13,7 +13,7 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run
+      - regression-test
 
       
       
