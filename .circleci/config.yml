@@ -1,10 +1,19 @@
 version: 2.1
-
 orbs:
   cypress: cypress-io/cypress@1.26.0
+
+  jobs:
+    cypress/run:
+      executors:
+        - cypress/base-14
+    steps:
+      - run: npm run 10travlr-production
+      
 
 workflows:
   build:
     jobs:
-      - cypress/run:
-          executor: cypress/base-14
+      - cypress/run
+
+      
+      
