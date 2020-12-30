@@ -5,6 +5,7 @@ jobs:
   build:
     docker:
       - image: cypress/included:4.10.0
+                'loadimpact/k6:latest'
     working_directory: ~/app
 
     steps:
@@ -30,22 +31,4 @@ jobs:
             - app
             - .cache/Cypress
 
-  loadimpact-test:
-    docker:
-      - image: loadimpact/k6:latest
-    environment:
-        TERM: xterm
-    working_directory: ~/app
-
-    steps:
-      - attach_workspace:
-          at: ~/
       - run: npm run k6-test
-
-workflows:
-  test-and-deploy:
-    jobs:
-      - build
-      - loadimpact-test:
-          requires:
-            - "build"
