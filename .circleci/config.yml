@@ -5,12 +5,12 @@ jobs:
     name: k6 local test on macos
     runs-on: macos-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v1
 
-      - name: Install k6 by homebrew
-        run: brew install k6
+        - name: Install k6 by homebrew
+          run: brew install k6
 
-      - name: Local k6 test
-        run: k6 run /Users/reposado/k6/script.js
+        - name: Local k6 test
+          run: k6 run /Users/reposado/k6/script.js
