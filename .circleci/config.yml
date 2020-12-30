@@ -21,6 +21,4 @@ workflows:
             - "cypress/install"
           command: npm run 10travlr-production
       
-      - api-testing:
-          requires:
-            - "cypress-install"
+      - api-testing
