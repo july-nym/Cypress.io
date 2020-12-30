@@ -1,7 +1,8 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
-  
+  node: circleci/node@4.1.0
+
 jobs:
 
   build:
@@ -11,25 +12,4 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: Install Dependencies
-          command: npm ci
-
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - app
-            - .cache/Cypress
-
       - run: npm run k6-tests
