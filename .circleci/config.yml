@@ -13,10 +13,14 @@ jobs:
       - run: npm run api-test
 
   deploy:
-    docker:
-      - image: 'cimg/base:stable'
+    executor: 
+      name: node/default
 
     steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run deploy
       - slack/notify:
           channel: C01HK2BGK1T
           mentions: '@here'
@@ -26,10 +30,6 @@ jobs:
           channel: C01HK2BGK1T
           event: pass
           template: success_tagged_deploy_1
-
-
-
-
 
 workflows: 
   build:
@@ -46,13 +46,6 @@ workflows:
           requires:
             - "cypress/install"
 
-      - pause_workflow:
-          filters:
-            tags:
-              only: /^v.*/
-          requires:
-            - "regression-testing"
-            - "api-testing"
       
       - deploy:
           requires:
