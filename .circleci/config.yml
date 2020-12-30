@@ -30,6 +30,14 @@ jobs:
           event: pass
           template: success_tagged_deploy_1
 
+
+  k6_performance_tests:
+    machine: true
+    steps:
+      - checkout
+          
+
+
 workflows: 
   build:
     jobs:
@@ -61,3 +69,12 @@ workflows:
               only: /^v.*/
           requires:
             - "pause_workflow"
+
+      - run_performance_tests:
+          name: Running k6 tests
+          requires:
+            - "cypress/install"
+          command: |
+            docker pull loadimpact/k6:latest
+            docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+          
