@@ -6,7 +6,7 @@ orbs:
   node: circleci/node@4.1
 
 jobs:
-  run_performance_tests:
+  performance-testing:
     machine: true
     steps:
     - checkout
@@ -47,7 +47,7 @@ workflows:
   build:
     jobs:
       - cypress/install
-      - run_performance_tests
+      - performance-testing
 
       - cypress/run:
           name: regression-testing
