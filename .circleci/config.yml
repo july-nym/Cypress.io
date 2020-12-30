@@ -1,20 +1,20 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.26.0
-
-  jobs:
-    cypress/run:
-      executors:
-        - cypress/base-14
-    
-    command:
-      - npm run 10travlr-production
-      
-
+  cypress: cypress-io/cypress@1
+jobs:
+  release:
+    executor: cypress/base-10
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run semantic-release
 workflows:
   build:
     jobs:
-      - cypress/run
-
-      
-      
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+      - release:
+          requires:
+            - cypress/run
