@@ -31,5 +31,7 @@ jobs:
           paths:
             - app
             - .cache/Cypress
+
+      - run: docker pull loadimpact/k6:latest
       
-      - run:   npm run k6-test
+      - run: npm run k6-test
