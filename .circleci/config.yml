@@ -13,9 +13,9 @@ jobs:
       - run: npm run api-test
 
   deploy:
-    executor: 
-      name: node/default
-
+    docker:
+      - image: 'cimg/base:stable'
+    
     steps:
       - checkout
       - node/install-packages
