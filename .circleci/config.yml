@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
   newman: postman/newman@0.0.2
-  slack: circleci/slack@4.1
+  slack: circleci/slack@4.2.0
   node: circleci/node@4.1
 
 jobs: 
@@ -15,12 +15,8 @@ jobs:
   deploy:
     docker:
       - image: 'cimg/base:stable'
-    
+
     steps:
-      - checkout
-      - node/install-packages
-      - run:
-          command: npm run deploy
       - slack/notify:
           channel: C01HK2BGK1T
           mentions: '@here'
