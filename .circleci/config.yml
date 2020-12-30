@@ -4,8 +4,9 @@ orbs:
 workflows:
   build:
     jobs:
+      - cypress/install
       - cypress/run:
-          docker:
-          - image: cypress/included:4.10.0
-      
-          command: npm run 10travlr-production
+          name: regression-test
+          requires:
+            - "cypress/install"
+          executor: cypress/included:4.10.0
