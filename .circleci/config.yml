@@ -1,5 +1,5 @@
 # .github/workflows/load-test.yml
-
+jobs:
 k6_cloud_test:
   name: k6 cloud test run
   runs-on: ubuntu-latest
