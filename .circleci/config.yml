@@ -1,12 +1,10 @@
-default: &defaults
-  parallelism: 1
-  working_directory: ~/app
-
 k6_performance_tests: &k6_performance_tests
   run:
     name: Running k6 tests
     # Download the k6 docker image. Alternatively, download the k6 release binary
     # Mount a volume to access the folder and run the test
+    - attach workspace:
+        at: ~/
     command: |
       docker pull loadimpact/k6:latest
       docker run -i loadimpact/k6:latest run - < /Users/reposado/k6/script.js
