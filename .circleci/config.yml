@@ -16,10 +16,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      - run: 
-          - docker pull loadimpact/k6:latest
-          - docker run -i loadimpact/k6 run - < /Cypress.io/k6/script.js
 
+    command: - docker pull loadimpact/k6:latest
+          
 
 
 
