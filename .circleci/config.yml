@@ -11,4 +11,6 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/run
+      - build
+      - cypress/run:
+          command: npm run 10travlr-production
