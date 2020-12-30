@@ -1,29 +1,46 @@
-version: 2.1
-
-orbs:
-  docker: circleci/docker@1.5.0
-
+version: 2
 jobs:
-
-  build: 
-    docker: 
-      - image: loadimpact/k6:latest
-    environment:
-      TERM: xterm
-    working_directory: /Users
-
+  one:
+    docker:
+      - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run:
-          name: pull docker
-          command: docker pull loadimpact/k6:latest
-          
+      - run: echo "A first hello"
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory
+          root: my_workspace
+          # Must be relative path from root
+          paths:
+            - echo-output      
+  two:
+    docker:
+      - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "A more familiar hi"  
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: my_workspace
 
-
-
-workflow:
-  test:
+      - run: |
+          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+workflows:
+  version: 2
+  one_and_two:
     jobs:
-      - build
-
-      #
+      - one
+      - two:
+          requires:
+            - one
