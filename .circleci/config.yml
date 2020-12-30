@@ -1,46 +1,27 @@
+default: &defaults
+  parallelism: 1
+  working_directory: ~/my-project
+
+k6_performance_tests: &k6_performance_tests
+  run:
+    name: Running k6 tests
+    # Download the k6 docker image. Alternatively, download the k6 release binary
+    # Mount a volume to access the folder and run the test
+    command: |
+      docker pull loadimpact/k6
+      docker run -i loadimpact/k6 run - < /Users/reposado/k6/script.js
 version: 2
 jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  run_performance_tests:
+    <<: *defaults
+    # Use `machine` executor because the Docker executor cannot mount volumes
+    machine: true
     steps:
       - checkout
-      - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspaces" > my_workspace/echo-output
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: my_workspace
-          # Must be relative path from root
-          paths:
-            - echo-output      
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"  
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
+      - *k6_performance_tests
 
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
 workflows:
   version: 2
-  one_and_two:
+  build-and-test:
     jobs:
-      - one
-      - two:
-          requires:
-            - one
+      - run_performance_tests
