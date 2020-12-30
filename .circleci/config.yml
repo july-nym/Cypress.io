@@ -19,8 +19,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run:
-          command: npm run deploy
+      
       - slack/notify:
           channel: C01HK2BGK1T
           mentions: '@here'
@@ -56,5 +55,9 @@ workflows:
           type: approval
       
       - deploy:
+          context: test-context
+          filters:
+            tags:
+              only: /^v.*/
           requires:
             - "pause_workflow"
