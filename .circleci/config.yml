@@ -50,7 +50,14 @@ workflows:
           requires:
             - "cypress/install"
 
-      - deploy:
+      - pause_workflow:
+          filters:
+            tags:
+              only: /^v.*/
           requires:
             - "regression-testing"
             - "api-testing"
+      
+      - deploy:
+          requires:
+            - "regression-testing"
