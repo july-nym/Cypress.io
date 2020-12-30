@@ -31,14 +31,20 @@ jobs:
           template: success_tagged_deploy_1
 
 
-  run_performance_tests:
-    machine: true
-    steps:
-      - checkout
+k6_performance_tests: &k6_performance_tests
     run:
-      command: |
-        docker pull loadimpact/k6:latest
-        docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+    name: Running k6 tests
+    # Download the k6 docker image. Alternatively, download the k6 release binary
+    # Mount a volume to access the folder and run the test
+    command: |
+      docker pull loadimpact/k6:latest
+      docker run -i loadimpact/k6 run - < /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
+
+run_performance_tests:
+  machine: true
+  steps:
+    - checkout
+    - *k6_performance_tests
           
 
 
@@ -74,8 +80,5 @@ workflows:
           requires:
             - "pause_workflow"
 
-      - run_performance_tests:
-          name: Running k6 tests
-          requires:
-            - "cypress/install"
+      - run_performance_tests
           
