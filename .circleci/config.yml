@@ -42,8 +42,7 @@ workflows:
             - "cypress/install"
           record: true
           parallel: true
-          parallelism: 2
-          group: 2 machines
+          parallelism: 4
           command: npm run 10travlr-production
       
       - api-testing:
