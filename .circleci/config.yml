@@ -3,17 +3,18 @@ orbs:
   cypress: cypress-io/cypress@1.26.0
 
   jobs:
-    regression-test:
+    cypress/run:
       executors:
         - cypress/base-14
-    steps:
-      - run: npm run 10travlr-production
+    
+    command:
+      - npm run 10travlr-production
       
 
 workflows:
   build:
     jobs:
-      - regression-test
+      - cypress/run
 
       
       
