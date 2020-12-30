@@ -4,7 +4,6 @@ jobs:
 
   build:
     docker:
-      - image: loadimpact/k6:latest
       - image: cypress/included:4.10.0
     working_directory: ~/app
 
