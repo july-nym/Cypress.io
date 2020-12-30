@@ -9,8 +9,7 @@ jobs:
     steps:
       - checkout
       - newman/newman-run:
-          collection: 
-            - npm run api-test
+          collection: ./collection.json
 
 workflows:
   build:
