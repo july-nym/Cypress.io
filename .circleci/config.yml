@@ -10,4 +10,4 @@ workflows:
           requires:
             - "cypress/install"
           executor: cypress/base-10
-          command: npm run 10 travlr-production
+          command: npm run 10travlr-production
