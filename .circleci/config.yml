@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: /usr/local/bin/docker
 
       - run:
           name: pull docker
