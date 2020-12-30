@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - newman/newman-run:
-          collection: api-test
+          collection: cypress/integration/10travlr/production/api-test/10travlr-prod-api-testing.postman_collection.json
 workflows:
   build:
     jobs:
