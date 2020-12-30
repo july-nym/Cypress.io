@@ -1,24 +1,4 @@
-k6_performance_tests: &k6_performance_tests
-  run:
+version: 2.1
 
-    - attach workspace:
-        at: ~/
-    command: |
-      docker pull loadimpact/k6:latest
-      docker run -i loadimpact/k6:latest run - < /Users/reposado/k6/script.js
-
-version: 2
-jobs:
-  run_performance_tests:
-    <<: *defaults
-    # Use `machine` executor because the Docker executor cannot mount volumes
-    machine: true
-    steps:
-      - checkout
-      - *k6_performance_tests
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - run_performance_tests
+orbs:
+  docker: circleci/docker@1.5.0
