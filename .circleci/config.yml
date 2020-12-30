@@ -4,10 +4,12 @@ orbs:
   newman: postman/newman@0.0.2
 
 jobs:
-  api-testing:
+  newman-collection-run:
     executor: newman/postman-newman-docker
     steps:
       - checkout
+      - newman/newman-run:
+          collection: cypress/integration/10travlr/production/api-test/10travlr-prod-api-testing.postman_collection.json
 
 workflows:
   build:
@@ -20,5 +22,4 @@ workflows:
             - "cypress/install"
           command: npm run 10travlr-production
       
-      - api-testing:
-          collection: npm run api-test
+      - newman-collection-run
