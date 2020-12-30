@@ -10,6 +10,13 @@ jobs:
     machine: true
     steps:
     - checkout
+    run:
+    name: Running k6 tests
+    # Download the k6 docker image. Alternatively, download the k6 release binary
+    # Mount a volume to access the folder and run the test
+    command: |
+      docker pull loadimpact/k6:latest
+      docker run -i loadimpact/k6 run - < /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
 
   api-testing:
     executor: newman/postman-newman-docker
@@ -34,19 +41,7 @@ jobs:
           channel: C01HK2BGK1T
           event: pass
           template: success_tagged_deploy_1
-
-
-k6_performance_tests: &k6_performance_tests
-    run:
-    name: Running k6 tests
-    # Download the k6 docker image. Alternatively, download the k6 release binary
-    # Mount a volume to access the folder and run the test
-    command: |
-      docker pull loadimpact/k6:latest
-      docker run -i loadimpact/k6 run - < /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
           
-
-
 workflows: 
   build:
     jobs:
