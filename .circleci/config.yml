@@ -3,6 +3,11 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
 
+  jobs:
+    build:
+      docker:
+        - image: cypress/base:14
+
 workflows:
   build:
     jobs:
