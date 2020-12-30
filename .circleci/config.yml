@@ -1,13 +1,25 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
+  newman: postman/newman@0.0.2
+
+jobs:
+  api-testing:
+    executor: newman/postman-newman-docker
+    steps:
+      - checkout
+      - newman/newman-run:
+          collection: ./collection.json
+
 workflows:
   build:
     jobs:
-      - cypress/install:
-          build: npm run build
+      - cypress/install
+
       - cypress/run:
           name: regression-test
           requires:
             - "cypress/install"
           command: npm run 10travlr-production
+      
+      - api-testing
