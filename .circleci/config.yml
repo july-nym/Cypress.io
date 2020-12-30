@@ -12,4 +12,8 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: Install Dependencies
+          command: npm ci
+          
       - run: npm run k6-tests
