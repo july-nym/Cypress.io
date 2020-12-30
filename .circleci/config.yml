@@ -19,7 +19,7 @@ jobs:
 
       - run:
           name: pull docker
-          command: - docker pull loadimpact/k6:latest
+          command: docker pull loadimpact/k6:latest
           
 
 
