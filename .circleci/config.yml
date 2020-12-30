@@ -10,6 +10,7 @@ jobs:
       - checkout
       - newman/newman-run:
           collection: ./collection.json
+      - run: npm run api-tests
 
 workflows:
   build:
