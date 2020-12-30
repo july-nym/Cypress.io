@@ -30,7 +30,7 @@ jobs:
             - app
             - .cache/Cypress
 
-  regression-test:
+  loadimpact-test:
     docker:
       - image: loadimpact/k6:latest
     environment:
@@ -41,3 +41,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run k6-test
+
+workflows:
+  test-and-deploy:
+    jobs:
+      - build
+      - loadimpact-test:
+          requires:
+            - "build"
