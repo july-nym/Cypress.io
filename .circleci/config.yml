@@ -21,4 +21,4 @@ workflows:
           command: npm run 10travlr-production
       
       - api-testing:
-          command: npm run api-test
+          collection: npm run api-test
