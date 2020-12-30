@@ -8,8 +8,6 @@ jobs:
     executor: newman/postman-newman-docker
     steps:
       - checkout
-      - newman/newman-run:
-          collection: ./collection.json
 
 workflows:
   build:
@@ -21,3 +19,7 @@ workflows:
           requires:
             - "cypress/install"
           command: npm run 10travlr-production
+      
+      - newman/newman-run:
+          name: api-testing
+          command: npm run api-test
