@@ -1,27 +1,96 @@
-default: &defaults
-  parallelism: 1
-  working_directory: ~/my-project
+version: 2.1
 
-k6_performance_tests: &k6_performance_tests
-  run:
-    name: Running k6 tests
-    # Download the k6 docker image. Alternatively, download the k6 release binary
-    # Mount a volume to access the folder and run the test
-    command: |
-      docker pull loadimpact/k6
-      docker run -i loadimpact/k6 run - < /Users/reposado/k6/script.js
-version: 2
+orbs:
+  newman: postman/newman@0.0.2
+  slack: circleci/slack@4.1
+
 jobs:
-  run_performance_tests:
-    <<: *defaults
-    # Use `machine` executor because the Docker executor cannot mount volumes
-    machine: true
+
+  api-test:
+      executor: newman/postman-newman-docker
+      steps:
+       - checkout
+       - run: npm run api-test
+       
+  build:
+    docker:
+      - image: cypress/included:4.10.0
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+
     steps:
       - checkout
-      - *k6_performance_tests
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: npm ci
+
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - app
+            - .cache/Cypress
+ 
+
+  regression-test:
+    docker:
+      - image: cypress/included:4.10.0
+    environment:
+        TERM: xterm
+    working_directory: ~/app
+
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run 10travlr-production
+
+  deploy:
+    docker:
+      - image: 'cimg/base:stable'
+
+    steps:
+      - slack/notify:
+          channel: C01HK2BGK1T
+          mentions: '@here'
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          channel: C01HK2BGK1T
+          event: pass
+          template: success_tagged_deploy_1
 
 workflows:
-  version: 2
-  build-and-test:
+  test-and-deploy:
     jobs:
-      - run_performance_tests
+      - build
+      - api-test:
+          requires:
+            - build
+      - regression-test:
+          requires: 
+            - api-test
+      - pause_workflow:
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - regression-test
+          type: approval
+      - deploy:
+          context: test-context
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - pause_workflow
