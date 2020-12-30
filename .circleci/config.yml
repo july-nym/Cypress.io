@@ -2,14 +2,15 @@ on: [push]
 
 jobs:
   k6_local_test:
-    name: k6 local test run - basic example
-    runs-on: ubuntu-latest
+    name: k6 local test on macos
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Run local k6 test
-        uses: k6io/action@v0.1
-        with:
-          filename: basic/script.js
+      - name: Install k6 by homebrew
+        run: brew install k6
+
+      - name: Local k6 test
+        run: k6 run /Users/reposado/k6/script.js
