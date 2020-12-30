@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable'
-    machine: macos-latest
+    runs-on: macos-latest
 
     steps:
       - checkout
