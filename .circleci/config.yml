@@ -15,3 +15,4 @@ jobs:
           name: Running k6 tests
           command: |
             docker pull loadimpact/k6:latest
+            docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
