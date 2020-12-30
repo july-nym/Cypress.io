@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import { check, group, sleep, fail } from '/Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js';
+import { check, group, sleep, fail } from 'k6';
 
 export let options = {
   vus: 1, // 1 user looping for 1 minute
