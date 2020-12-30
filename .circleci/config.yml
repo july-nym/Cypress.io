@@ -1,6 +1,6 @@
 default: &defaults
   parallelism: 1
-  working_directory: ~/
+  working_directory: ~/app
 
 k6_performance_tests: &k6_performance_tests
   run:
