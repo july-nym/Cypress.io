@@ -2,9 +2,8 @@ on: [push]
 
 jobs:
   build:
-    k6_local_test:
-      name: k6 local test on macos
-      runs-on: macos-latest
+    name: k6 local test on macos
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
