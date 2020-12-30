@@ -51,7 +51,7 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - "regression-test"
+            - "regression-testing"
             - "api-testing"
           type: approval
       
