@@ -10,13 +10,10 @@ jobs:
       - image: loadimpact/k6:latest
     environment:
       TERM: xterm
-    working_directory: ~/app
+    working_directory: ~/
 
     steps:
       - checkout
-      - attach_workspace:
-          at: /Users/reposado/
-
       - run:
           name: pull docker
           command: docker pull loadimpact/k6:latest
