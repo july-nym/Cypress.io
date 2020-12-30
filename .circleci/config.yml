@@ -7,4 +7,6 @@ jobs:
       - image: loadimpact/k6:latest
 
     steps:
+      - checkout
+          
       - run: docker run -i loadimpact/k6 run - < /Users/reposado/k6/script.js  
