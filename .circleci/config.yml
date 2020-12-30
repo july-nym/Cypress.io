@@ -8,6 +8,14 @@ jobs:
   build: 
     docker: 
       - image: loadimpact/k6:latest
+    environment:
+      TERM: xterm
+    working_directory: ~/app
+
+    steps:
+      - checkout
+
+
 
 
 workflow:
