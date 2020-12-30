@@ -1,12 +1,11 @@
 version: 2.1
 
 jobs:
+
   build:
-    docker:
-      - image: 'cimg/base:stable'
-    working_directory: ~/project
+  
+    macos:
+      xcode: 11.3.0
 
     steps:
-      - checkout
-      - run: brew install k6
-      - run: k6 run basic/script.js
+      - run: brew k6 install 
