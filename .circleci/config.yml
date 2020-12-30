@@ -20,6 +20,10 @@ jobs:
           name: Install Dependencies
           command: npm ci
 
+      - run: 
+          name: Docker-Pull
+          command: docker pull loadimpact/k6:latest
+
       - save_cache:
           key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
@@ -31,7 +35,5 @@ jobs:
           paths:
             - app
             - .cache/Cypress
-
-      - run: docker pull loadimpact/k6:latest
       
       - run: npm run k6-test
