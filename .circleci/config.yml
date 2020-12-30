@@ -12,7 +12,7 @@ jobs:
     - checkout
     
     - run: docker pull loadimpact/k6:latest
-    - run: docker run -i loadimpact/k6 run - < /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
+    - run: docker run -i loadimpact/k6 run /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
 
   api-testing:
     executor: newman/postman-newman-docker
