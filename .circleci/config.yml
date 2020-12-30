@@ -2,20 +2,46 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
   newman: postman/newman@0.0.2
+  slack: circleci/slack@4.2.0
+  node: circleci/node@4.1
 
-jobs:
+jobs: 
   api-testing:
     executor: newman/postman-newman-docker
     steps:
       - checkout
       - run: npm run api-test
-workflows:
+
+  deploy:
+    executor: 
+      name: node/default
+
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run deploy
+      - slack/notify:
+          channel: C01HK2BGK1T
+          mentions: '@here'
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          channel: C01HK2BGK1T
+          event: pass
+          template: success_tagged_deploy_1
+
+
+
+
+
+workflows: 
   build:
     jobs:
       - cypress/install
 
       - cypress/run:
-          name: regression-test
+          name: regression-testing
           requires:
             - "cypress/install"
           command: npm run 10travlr-production
@@ -23,3 +49,8 @@ workflows:
       - api-testing:
           requires:
             - "cypress/install"
+
+      - deploy:
+          requires:
+            - "regression-testing"
+            - "api-testing"
