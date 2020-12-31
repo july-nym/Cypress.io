@@ -17,7 +17,7 @@ jobs:
 
     - run: 
         name: smoke-testing
-        command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/cypress/integration/10travlr/production/k6/smoke-testing.js
+        command: npm run k6-smoke-testing
 
     - run: 
         name: load-testing
