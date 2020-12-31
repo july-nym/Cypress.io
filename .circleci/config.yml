@@ -16,9 +16,21 @@ jobs:
         command: docker pull loadimpact/k6:latest
 
     - run: 
-        name: k6-smoke-testing
+        name: smoke-testing
         command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/cypress/integration/10travlr/production/k6/smoke-testing.js
 
+    - run: 
+        name: load-testing
+        command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/cypress/integration/10travlr/production/k6/load-testing.js
+
+    - run: 
+        name: soak-testing
+        command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/cypress/integration/10travlr/production/k6/soak-testing.js
+
+    - run: 
+        name: stress-testing
+        command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/cypress/integration/10travlr/production/k6/stress-testing.js
+    
   api-testing:
     executor: newman/postman-newman-docker
     steps:
