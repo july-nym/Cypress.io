@@ -17,7 +17,8 @@ jobs:
 
     - run: 
         name: execute-docker
-        command: docker run -i -v /var/lib/docker/volumes/my-vol/_data loadimpact/k6 run /Users/reposado/Cypress.io/cypress/integration/10travlr/production/k6/script.js
+        command: docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+
 
   api-testing:
     executor: newman/postman-newman-docker
