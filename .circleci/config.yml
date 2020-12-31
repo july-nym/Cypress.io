@@ -17,7 +17,7 @@ jobs:
 
     - run: 
         name: execute-docker
-        command: docker run -i -v $HOME/my-project:/ci/ loadimpact/k6:latest run /ci/loadtests/performance-test.js
+        command: npm run k6-test
 
 
   api-testing:
