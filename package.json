@@ -8,7 +8,7 @@
     "10travlr-regression": "npm run 10travlr-production",
     "10travlr-lokal": "npx cypress run --spec 'cypress/integration/10travlr/production/regression/**/*' --headless --browser chrome",
     "10travlr": "npm run 10travlr-lokal",
-    "postman-api-test": "newman run '/postman/10travlr-prod-api-testing.postman_collection.json' ",
+    "postman-api-test": "newman run '/Cypress.io/postman/10travlr-prod-api-testing.postman_collection.json' ",
     "k6-test": "k6 run '/Users/reposado/Cypress.io/k6/smoke-testing.js' ",
     "k6-smoke-testing": "docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/k6/smoke-testing.js",
     "k6-load-testing": "docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest cloud /tmp/Cypress.io/k6/load-testing.js",
