@@ -34,13 +34,13 @@ jobs:
     
   api-testing:
     executor: newman/postman-newman-docker
-    
+
     steps:
       - checkout
 
       - run: 
           name: Postman
-          command: npm run api-test
+          command: npm run postman-api-test
 
   deploy:
     executor: 
