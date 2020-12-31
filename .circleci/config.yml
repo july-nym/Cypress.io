@@ -6,7 +6,7 @@ orbs:
   node: circleci/node@4.1
 
 jobs:
-  performance-testing:
+  k6-performance-testing:
     machine: true
     steps:
     - checkout
@@ -16,8 +16,8 @@ jobs:
         command: docker pull loadimpact/k6:latest
 
     - run: 
-        name: execute-docker
-        command: docker run -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest run /tmp/Cypress.io/cypress/integration/10travlr/production/k6/script.js
+        name: k6-smoke-testing
+        command: docker run -e K6_CLOUD_TOKEN=$K6_CLOUD_TOKEN -e K6_CLOUD_PROJECT_ID=$K6_CLOUD_PROJECT_ID -v /home/circleci/project:/tmp/Cypress.io -i loadimpact/k6:latest run /tmp/Cypress.io/cypress/integration/10travlr/production/k6/smoke-testing.js
 
   api-testing:
     executor: newman/postman-newman-docker
@@ -48,7 +48,7 @@ workflows:
     jobs:
       - cypress/install
 
-      - performance-testing:
+      - k6-performance-testing:
           requires:
             - "cypress/install"
 
@@ -68,7 +68,7 @@ workflows:
               only: /^v.*/
           requires:
             - "regression-testing"
-            - "performance-testing"
+            - "k6-performance-testing"
             - "api-testing"
           type: approval
       
