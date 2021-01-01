@@ -54,9 +54,9 @@ workflows:
           filters:
             tags:
               only: /^v.*/
-              requires:
-                  - "regression-testing"
-                  - "api-testing"
+          requires:
+            - "regression-testing"
+            - "api-testing"
 
       # - pause_workflow:
       #     filters:
