@@ -41,7 +41,7 @@ workflows:
 
       - api-testing:
           requires:
-            - "cypress/installx"
+            - "cypress/install"
 
       - cypress/run:
           name: regression-testing
