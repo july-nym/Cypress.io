@@ -57,13 +57,4 @@ workflows:
           requires:
             - "regression-testing"
             - "api-testing"
-
-      # - pause_workflow:
-      #     filters:
-      #       tags:
-      #         only: /^v.*/
-      #     requires:
-      #       - "regression-testing"
-      #       - "api-testing"
-      #     type: approval
           
