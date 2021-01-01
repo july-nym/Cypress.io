@@ -65,19 +65,15 @@ workflows:
     jobs:
       - cypress/install
 
-      - k6-performance-testing:
-          requires:
-            - "cypress/install"
+      - k6-performance-testing
+
+      - api-testing
 
       - cypress/run:
           name: regression-testing
           requires:
             - "cypress/install"
           command: npm run 10travlr-production
-      
-      - api-testing:
-          requires:
-            - "cypress/install"
 
       - pause_workflow:
           filters:
