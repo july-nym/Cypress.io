@@ -5,6 +5,8 @@ orbs:
   slack: circleci/slack@4.2.0
   node: circleci/node@4.1
 
+  # k6 Performance Testing only run once a week in friday.
+
 jobs:
   # k6-performance-testing:
   #   machine: true
@@ -81,7 +83,7 @@ workflows:
               only: /^v.*/
           requires:
             - "regression-testing"
-            - "k6-performance-testing"
+            # - "k6-performance-testing"
             - "api-testing"
           type: approval
       
