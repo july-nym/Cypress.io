@@ -5,7 +5,7 @@ context('Accessing Create List', () => {
     describe('Create List', () => {
         
         it('Go to 10Travlr URL', () => {
-            cy.visit('https://www.10travlr.com.au/')
+            cy.visit('https://10travlr.com.au/')
             .location('pathname')
             .should('eq','/')
 
@@ -24,7 +24,7 @@ context('Accessing Create List', () => {
             cy.get('#btn-submit')
             .click()
 
-            cy.visit('https://www.10travlr.com.au/')
+            cy.visit('https://10travlr.com.au/')
             .location('pathname')
             .should('eq','/')
 
