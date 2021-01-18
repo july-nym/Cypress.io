@@ -86,26 +86,26 @@ context('Accessing Shortlist', () => {
 
         });
 
-        it('Checking Title Nightlife', () => {
-            cy.get(':nth-child(7) > .group-header-container > :nth-child(1) > .t-heading-2')
-            .should('contain','Nightlife')
-            .scrollIntoView()
+        // it('Checking Title Nightlife', () => {
+        //     cy.get(':nth-child(7) > .group-header-container > :nth-child(1) > .t-heading-2')
+        //     .should('contain','Nightlife')
+        //     .scrollIntoView()
 
-        });
+        // });
 
-        it('Checking Title Weddings', () => {
-            cy.get(':nth-child(8) > .group-header-container > :nth-child(1) > .t-heading-2')
-            .should('contain','Weddings')
-            .scrollIntoView()
+        // it('Checking Title Weddings', () => {
+        //     cy.get(':nth-child(8) > .group-header-container > :nth-child(1) > .t-heading-2')
+        //     .should('contain','Weddings')
+        //     .scrollIntoView()
 
-        });
+        // });
 
-        it('Checking Title Honeymoons', () => {
-            cy.get(':nth-child(9) > .group-header-container > :nth-child(1) > .t-heading-2')
-            .should('contain','Honeymoons')
-            .scrollIntoView()
+        // it('Checking Title Honeymoons', () => {
+        //     cy.get(':nth-child(9) > .group-header-container > :nth-child(1) > .t-heading-2')
+        //     .should('contain','Honeymoons')
+        //     .scrollIntoView()
 
-        });
+        // });
     
     });
     
