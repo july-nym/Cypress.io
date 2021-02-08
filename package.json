@@ -16,7 +16,7 @@
     "cypress": "^6.2.1"
   },
   "dependencies": {
-    "ansi-styles": "^4.3.0",
+    "ansi-styles": "^4.3.0", 
     "onetime": "^5.1.2"
   },
   "repository": {
